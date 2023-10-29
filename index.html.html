@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Temperature converter</title>
+    <link rel="stylesheet" href="temper.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <img src="OIG.jpeg" alt="Company Logo" width="70" height="80" />
+    </div>
+  </nav>
+    
+    <div class="container">
+        <div class="title">
+            <h1>Temperature Converter</h1>
+            <span class="Temperature-icon"><i class="fa-solid fa-temperature-three-quarters"></i></span>
+        </div>
+
+        <div id="celcius">
+            <input type="number" name="celcius" placeholder="celcius">
+            <span class="icon">&#8451</span>
+        </div>
+
+        <div id="fahrenheit">
+            <input type="number" name="fahrenheit" placeholder="fahrenheit">
+            <span class="icon">&#8457;
+            </span>
+        </div>
+
+        <div id="kelvin">
+            <input type="number" name="kelvin" placeholder="kelvin">
+            <span class="icon">&#8490</span>
+        </div>
+
+        <div class="button">
+            <button>All Clear</button>
+        </div>
+
+    </div>
+    <script>
+        let celsiusInput = document.querySelector("#celcius > input");
+let fahrenheitInput = document.querySelector("#fahrenheit > input");
+let kelvinInput = document.querySelector("#kelvin > input");
+
+let btn = document.querySelector(".button");
+
+function roundNumber(number) {
+  return Math.round(number * 100) / 100;
+}
+
+
+
+celsiusInput.addEventListener("input", function () {
+  let cTemp = parseFloat(celsiusInput.value);
+  let fTemp = cTemp * (9 / 5) + 32;
+  let kTemp = cTemp + 273.15;
+
+  fahrenheitInput.value = roundNumber(fTemp);
+  kelvinInput.value = roundNumber(kTemp);
+});
+
+fahrenheitInput.addEventListener("input", function () {
+  let fTemp = parseFloat(fahrenheitInput.value);
+  let cTemp = (fTemp - 32) * (5 / 9);
+  let kTemp = (fTemp - 32) * (5 / 9) + 273.15;
+
+  celsiusInput.value = roundNumber(cTemp);
+  kelvinInput.value = roundNumber(kTemp);
+});
+
+kelvinInput.addEventListener('input', function () {
+  let kTemp = parseFloat(kelvinInput.value);
+  let cTemp = kTemp - 273.15;
+  let fTemp = (kTemp - 273.15) * (9 / 5) + 32;
+
+  celsiusInput.value = roundNumber(cTemp);
+  fahrenheitInput.value = roundNumber(fTemp);
+});
+
+btn.addEventListener('click', ()=>{
+  celsiusInput.value = "";
+  kelvinInput.value = "";
+  fahrenheitInput.value = "";
+})
+
+    </script>
+</body>
+</html>
